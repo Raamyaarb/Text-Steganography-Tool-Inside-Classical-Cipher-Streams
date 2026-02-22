@@ -1,0 +1,122 @@
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    margin: 0;
+    background: #0b1220;
+    color: #e5e7eb;
+}
+
+.topbar {
+    padding: 15px 30px;
+    background: #0f172a;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.hero {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px;
+    background: linear-gradient(145deg, #0f172a, #020617);
+    border-radius: 12px;
+    margin: 20px;
+}
+
+.hero h1 {
+    font-size: 36px;
+}
+
+.hero p {
+    color: #9ca3af;
+    max-width: 600px;
+}
+
+.hero-icon {
+    font-size: 80px;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    flex: 1;
+    background: #020617;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #1e293b;
+}
+
+.card h2 {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    background: #020617;
+    border: 1px solid #1e293b;
+    border-radius: 8px;
+    color: white;
+    margin-top: 5px;
+}
+
+textarea {
+    min-height: 90px;
+}
+
+button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+.output {
+    margin-top: 20px;
+}
+
+.popup {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    background: #dc2626;          /* red error */
+    color: white;
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    display: none;
+    z-index: 9999;
+    animation: slideIn 0.3s ease-out;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    color: #9ca3af;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+

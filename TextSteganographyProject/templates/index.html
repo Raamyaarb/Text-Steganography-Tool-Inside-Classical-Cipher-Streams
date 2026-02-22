@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Secure Text Steganography Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header class="topbar">
+    🔐 Secure Text Steganography Tool
+</header>
+
+<section class="hero">
+    <div class="hero-text">
+        <h1>Invisible Ink for the Digital Age</h1>
+        <p>
+            Encrypt your secrets and hide them within ordinary text using advanced
+            steganography algorithms. Secure, private, and undetectable.
+        </p>
+    </div>
+    <div class="hero-icon">🔒</div>
+</section>
+
+<div class="container">
+
+    <!-- ENCRYPT & EMBED -->
+    <div class="card">
+        <h2>🔐 1. Encrypt & Embed</h2>
+
+        <form action="/embed" method="POST" onsubmit="return validateEmbed()">
+
+            <label>Algorithm</label>
+            <select name="algorithm" id="encAlgo" onchange="updateKeyHint('enc')">
+                <option value="caesar" {% if enc_algo == "caesar" %}selected{% endif %}>Caesar Cipher</option>
+                <option value="vigenere" {% if enc_algo == "vigenere" %}selected{% endif %}>Vigenère Cipher</option>
+                <option value="railfence" {% if enc_algo == "railfence" %}selected{% endif %}>Rail Fence Cipher</option>
+            </select>
+
+            <label>Encryption Key</label>
+            <input type="text" name="key" id="encKey"
+                   value="{{ enc_key | default('') }}"
+                   placeholder="e.g. 3 or SECRET">
+
+            <label>Secret Message</label>
+            <textarea name="secret"
+                      placeholder="Enter the secret message you want to hide...">{{ secret | default('') }}</textarea>
+
+            <label>Carrier Text (Cover)</label>
+            <textarea name="carrier"
+                      placeholder="Paste a plain text here to hide your secret inside...">{{ carrier | default('') }}</textarea>
+
+            <button type="submit">Encrypt & Embed</button>
+        </form>
+
+        {% if stego %}
+        <div class="output">
+            <h4>Final Stego Text</h4>
+            <textarea readonly>{{ stego }}</textarea>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- EXTRACT & DECRYPT -->
+    <div class="card">
+        <h2>🔓 2. Extract & Decrypt</h2>
+
+        <form action="/extract" method="POST" onsubmit="return validateExtract()">
+
+            <label>Stego Text (Input)</label>
+            <textarea name="stego"
+                      placeholder="Paste the text containing the hidden secret here...">{{ stego_text | default('') }}</textarea>
+
+            <label>Algorithm Used</label>
+
+<input type="text"
+       value="{{ dec_algo | default(enc_algo | upper) }}"
+       readonly
+       class="readonly-box">
+
+<input type="hidden"
+       name="algorithm"
+       value="{{ dec_algo | default(enc_algo) }}">
+
+
+            <label>Decryption Key</label>
+            <input type="text" name="key" id="decKey"
+                   value="{{ dec_key | default('') }}"
+                   placeholder="Must match encryption key">
+
+            <button type="submit">Extract & Decrypt</button>
+        </form>
+
+        {% if recovered %}
+        <div class="output">
+            <h4>Recovered Secret Message</h4>
+            <textarea readonly>{{ recovered }}</textarea>
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    CYBER SECURITY
+</footer>
+
+<!-- POPUP ERROR -->
+<div id="popup" class="popup"></div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+{% if error %}
+<script>
+    showError("{{ error }}");
+</script>
+{% endif %}
+
+</body>
+</html>
